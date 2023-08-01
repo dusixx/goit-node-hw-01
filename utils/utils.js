@@ -18,12 +18,10 @@ export const ERROR = {
   alreadyExists: 'A contact with the same email or phone already exists',
 };
 
-const isValidEmail = v => /^\S+@\S+\.\S+$/.test(v);
 const isValidName = v => /^\s*[A-Z][a-z]+(\s*[A-Z][a-z]+)?\s*$/.test(v);
+const isValidEmail = v => /^\S+@\S+\.\S+$/.test(v);
 const isValidPhone = v => /^([\s-]*\d[\s-]*){10}$/.test(v);
 
-const formatEmail = v => String(v).trim();
-const formatName = v => String(v).replace(/\s+/, ' ').trim();
 const formatPhone = v =>
   String(v)
     .replace(/[\s-]/g, '')
@@ -31,13 +29,14 @@ const formatPhone = v =>
 
 export const format = {
   name(v) {
-    if (!isValidName(v)) throw Error(ERROR.invalidName);
-    return formatName(v);
+    const str = String(v).replace(',', ' ').trim();
+    if (!isValidName(str)) throw Error(ERROR.invalidName);
+    return str;
   },
 
   email(v) {
     if (!isValidEmail(v)) throw Error(ERROR.invalidEmail);
-    return formatEmail(v);
+    return v.trim();
   },
 
   phone(v) {

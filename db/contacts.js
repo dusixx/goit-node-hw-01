@@ -52,7 +52,7 @@ export default class Contacts {
    * @param {string} id
    * @returns {object|null} данные контакта с заданным id
    */
-  get = async id => {
+  get = async ({ id }) => {
     const list = await this.readAll();
     return list?.find(itm => itm.id === id) ?? null;
   };
@@ -63,7 +63,7 @@ export default class Contacts {
    * @param {string} id
    * @returns {object|null} данные удаленного контакта
    */
-  remove = async id => {
+  remove = async ({ id }) => {
     let removed = null;
     const list = await this.readAll();
 
