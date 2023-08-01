@@ -1,4 +1,4 @@
-# goit-node-hw-01-cli-app
+# Node CLI App
 
 ## Get contact by id
 
