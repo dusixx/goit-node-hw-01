@@ -4,3 +4,4 @@ node_modules/
 .env
 .enc.local
 tempCodeRunner*
+.support
