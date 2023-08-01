@@ -1,5 +1,3 @@
-# Node CLI App
-
 ## Get contact by id
 
 ```shell
