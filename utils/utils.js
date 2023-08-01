@@ -27,6 +27,10 @@ const formatPhone = v =>
     .replace(/[\s-]/g, '')
     .replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 
+/*
+  Методы форматирования данных контакта 
+  с простой проверкой валидности 
+*/
 export const format = {
   name(v) {
     const str = String(v).replace(',', ' ').trim();
@@ -45,6 +49,12 @@ export const format = {
   },
 };
 
+/**
+ *
+ * Проверяет, существует ли в list контакт с заданными параметрами
+ * @param {array} list - массив контактов
+ * @param {object} {email, phone} - уникальные параметры
+ */
 export const checkIfContactExists = (list, { email, phone } = {}) => {
   if (!Array.isArray(list)) return;
   list.find(itm => {
@@ -53,6 +63,12 @@ export const checkIfContactExists = (list, { email, phone } = {}) => {
   });
 };
 
+/**
+ *
+ * Парсит список аргументов скрипта
+ * Если у опции несколько значений - вернет их массивом
+ * @returns {object} { optName: {array|string} optValue, ... }
+ */
 export const parseArgv = () => {
   let opt;
 
