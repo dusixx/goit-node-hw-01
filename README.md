@@ -1,4 +1,4 @@
-## Get contact by id
+## `get` contact by id
 
 ```shell
 $ node app.js --action get --id gertd4N3iKsbKpsfyAi65
@@ -8,7 +8,7 @@ $ node app.js --action get --id gertd4N3iKsbKpsfyAi65
 
 ![Get contact screenshot](https://i.ibb.co/mRmtwZF/get.jpg)
 
-## Add new contact
+## `add` new contact
 
 ```shell
 $ node app.js --action add --name Leo Style --email leo.style@gmail.com --phone 987-654-3455
@@ -18,7 +18,7 @@ $ node app.js --action add --name Leo Style --email leo.style@gmail.com --phone 
 
 ![Add contact screenshot](https://i.ibb.co/m0GD27t/add.jpg)
 
-## Remove contact by id
+## `remove` contact by id
 
 ```shell
 $ node app.js --action remove --id gertd4N3iKsbKpsfyAi65
@@ -28,7 +28,7 @@ $ node app.js --action remove --id gertd4N3iKsbKpsfyAi65
 
 ![Remove contact screenshot](https://i.ibb.co/WVmKYjF/remove.jpg)
 
-## Show a list of all contacts
+## Show a `list` of all contacts
 
 ```shell
 $ node app.js --action list
