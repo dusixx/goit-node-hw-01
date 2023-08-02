@@ -22,7 +22,7 @@ export default class Contacts {
    * Перезаписывает файл новыми данными
    * @param {array} data - данные для записи
    */
-  flush = async data =>
+  #flush = async data =>
     await fs.writeFile(CONTACTS_PATH, JSON.stringify(data, null, 2));
 
   /**
@@ -31,7 +31,7 @@ export default class Contacts {
    * @param {string} charset - кодировка файла БД
    * @returns {array|null} массив данных
    */
-  readAll = async (charset = DEF_CHARSET) => {
+  #readAll = async (charset = DEF_CHARSET) => {
     try {
       const data = await fs.readFile(CONTACTS_PATH, charset);
       return JSON.parse(data);
@@ -40,11 +40,13 @@ export default class Contacts {
     }
   };
 
+  // Actions
+
   /**
    *
    * Выводит список контактов в виде таблицы
    */
-  list = async () => console.table(await this.readAll());
+  list = async () => console.table(await this.#readAll());
 
   /**
    *
@@ -53,7 +55,7 @@ export default class Contacts {
    * @returns {object|null} данные контакта с заданным id
    */
   get = async ({ id }) => {
-    const list = await this.readAll();
+    const list = await this.#readAll();
     return list?.find(itm => itm.id === id) ?? null;
   };
 
@@ -65,7 +67,7 @@ export default class Contacts {
    */
   remove = async ({ id }) => {
     let removed = null;
-    const list = await this.readAll();
+    const list = await this.#readAll();
 
     // удаляем контакт из массива
     const newData = list?.filter(itm => {
@@ -74,7 +76,7 @@ export default class Contacts {
     });
 
     // если контакт успшено удален - сохраняем результат в файл
-    if (removed) await this.flush(newData);
+    if (removed) await this.#flush(newData);
 
     return removed;
   };
@@ -86,7 +88,7 @@ export default class Contacts {
    * @returns {object} данные успешно добавленного контакта
    */
   add = async ({ name, email, phone } = {}) => {
-    const list = (await this.readAll()) ?? [];
+    const list = (await this.#readAll()) ?? [];
 
     const contact = {
       id: getId(),
@@ -99,7 +101,7 @@ export default class Contacts {
     checkIfContactExists(list, contact);
 
     // пишем контакт в файл
-    this.flush([...list, contact]);
+    this.#flush([...list, contact]);
 
     return contact;
   };
