@@ -33,7 +33,9 @@ const formatPhone = v =>
 */
 export const format = {
   name(v) {
-    const str = String(v).replace(',', ' ').trim();
+    const str = String(v)
+      .replace(/\s*,\s*/, ' ')
+      .trim();
     if (!isValidName(str)) throw Error(ERROR.invalidName);
     return str;
   },
@@ -57,7 +59,7 @@ export const format = {
  */
 export const checkIfContactExists = (list, { email, phone } = {}) => {
   if (!Array.isArray(list)) return;
-  list.find(itm => {
+  list.forEach(itm => {
     if (itm.email === email || (itm.phone && itm.phone === phone))
       throw Error(ERROR.alreadyExists);
   });
